@@ -4,6 +4,7 @@ if ($_SESSION['nivel'] != 1) {
 	header('location:../');
 }
 include('php/conecta.php');
+include('../nav.php');
 
 //Consulta Categoria
 $script_categoria = $conn->prepare("SELECT * FROM tb_categoria");
