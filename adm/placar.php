@@ -4,7 +4,6 @@ if ($_SESSION['nivel'] != 1) {
 	header('location:../');
 }
 include('php/conecta.php');
-include('../nav.php');
 
 //Consulta Placar
 $script_placar = $conn->prepare("SELECT * FROM tb_placar");
@@ -15,8 +14,7 @@ $script_placar->execute();
 <head>
 	<title>Placar | J-Tec</title>
 	<meta charset="utf-8">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	
 </head>
 	<!-- CSS -->
 	<style>
@@ -62,19 +60,40 @@ $script_placar->execute();
   	});
 });
 	</script>
+	</head>
 <body>
+	<?php include('../nav.php'); ?>
 	<!-- Tag "span" usada para retorno do ajax -->
 	<span></span><br>
 
-
-<input type="text" id="time1" placeholder="Time 1"> <input type="text" id="gols1" placeholder="Total de gols"><br>
-<input type="text" id="time2" placeholder="Time 2"> <input type="text" id="gols2" placeholder="Total de gols"><br>
-<button id="cadastrar">Cadastrar</button>
-<br><br>
-</head>
-<body>
+<div class="container row justify-content-center">
+	<div class="col-6">
+		<div class="form-floating">
+			<input class="form-control" type="text" id="time1" placeholder="Time 1">
+			<label for="time1">Time 1</label>
+		</div>
+		<div class="form-floating">
+			<input class="form-control" type="text" id="time2" placeholder="Time 2">
+			<label for="time2">Time 2</label>
+		</div>
+	</div>
+	<div class="col-2">
+		<div class="form-floating">
+			<input class="form-control" type="text" id="gols1" placeholder="Total de gols">
+			<label for="gols1">Total de Gols</label>	
+		</div>
+		<div class="form-floating">
+			<input class="form-control" type="text" id="gols2" placeholder="Total de gols">
+			<label for="gols2">Total de Gols</label>
+		</div>
+	</div>
+	<div class="col-6 p-2">
+		<button class="btn btn-primary" id="cadastrar">Cadastrar</button>
+	</div>
+</div>
 
 	<!-- Tabela exibindo dados do placar -->
+	<div class="container mx-auto">
 	<table>
 		<thead>
 			<tr>
@@ -95,8 +114,8 @@ $script_placar->execute();
 				<td>X</td>
 				<td><?php echo $placar['nm_time_2']; ?></td>
 				<td><?php echo $placar['gols_2']; ?></td>
-				<td><a href="php/delete_placar.php?id=<?php echo $placar['id'];?>">Excluir</a></td>
-				<td><button  data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $placar['id']; ?>">Editar</button></td>
+				<td><a class="btn btn-outline-danger" href="php/delete_placar.php?id=<?php echo $placar['id'];?>">Excluir</a></td>
+				<td><button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $placar['id']; ?>">Editar</button></td>
 			</tr>
 
 <script type="text/javascript">
@@ -130,13 +149,13 @@ $script_placar->execute();
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body">
-			       <input type="text" id="nm_time_1_<?php echo $placar['id']; ?>" placeholder="Time 1" value="<?php echo $placar['nm_time_1']; ?>"><br>
+			       <input class="form-control" type="text" id="nm_time_1_<?php echo $placar['id']; ?>" placeholder="Time 1" value="<?php echo $placar['nm_time_1']; ?>"><br>
 
-			       <input type="text" id="gols_1_<?php echo $placar['id']; ?>" placeholder="Gols" value="<?php echo $placar['gols_1']; ?>"><br>
+			       <input class="form-control" type="text" id="gols_1_<?php echo $placar['id']; ?>" placeholder="Gols" value="<?php echo $placar['gols_1']; ?>"><br>
 
-			       <input type="text" id="nm_time_2_<?php echo $placar['id']; ?>" placeholder="Time 2" value="<?php echo $placar['nm_time_2']; ?>"><br>
+			       <input class="form-control" type="text" id="nm_time_2_<?php echo $placar['id']; ?>" placeholder="Time 2" value="<?php echo $placar['nm_time_2']; ?>"><br>
 
-			       <input type="text" id="gols_2_<?php echo $placar['id']; ?>" placeholder="Gols" value="<?php echo $placar['gols_2']; ?>"><br>
+			       <input class="form-control" type="text" id="gols_2_<?php echo $placar['id']; ?>" placeholder="Gols" value="<?php echo $placar['gols_2']; ?>"><br>
 
 			      </div>
 			      <div class="modal-footer">
@@ -150,7 +169,8 @@ $script_placar->execute();
 <?php }?>
 		</tbody>
 	</table>
-	<br>
+</div>
+
 
 </body>
 </html>
