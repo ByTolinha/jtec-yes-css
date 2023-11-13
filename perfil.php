@@ -68,6 +68,13 @@ if ($count_views['COUNT(*)'] == 0) {
 	<title><?php echo $user['nm_user']; ?></title>
 </head>
 <body>
+	<style type="text/css">
+	.card-perfil{
+	    display: grid;
+	    grid-template-columns: repeat(5, 1fr);
+	    gap: 15px;
+	}
+</style>
 	<!-- Nav -->
 	<?php include('nav.php');?>
 
@@ -96,6 +103,7 @@ if ($count_views['COUNT(*)'] == 0) {
 				<button data-bs-toggle="collapse" data-bs-target="#estatisticas" class="btn">Estatísticas</button>
 		</div>
 	</div>
+</div>
 </div>
 
 		<!-- Form cadastro noticias -->
@@ -160,6 +168,7 @@ if ($count_views['COUNT(*)'] == 0) {
 	</div>
 </div>
 <div class="collapse" data-bs-parent="#accordion" id="estatisticas">
+		<div class="container shadow p-2 col-7 text-center">
 	<h2>Estatisticas</h2>
 <br>
 <div>
@@ -177,11 +186,12 @@ if ($count_views['COUNT(*)'] == 0) {
   <p><?php echo $views;?></p>
 </div>
 </div>
+</div>
 
 <!-- Notícias do user -->
 <div class="container mt-5">
 <h1>Suas Noticias</h1>
-<div class="card-group">
+<div class="card-perfil">
 	<?php
 		// Verificação se tem noticias
 		if ($script_noticias->rowCount()>0){
@@ -192,7 +202,7 @@ if ($count_views['COUNT(*)'] == 0) {
 		$script_nome_autor->execute();
 		$nome_autor = $script_nome_autor->fetch(PDO::FETCH_ASSOC);
 	?>
-		<div id="card" class="card">
+		<div class="card">
 			<img src="img/<?php echo $noticia['img_1']; ?>">
 			<div class="card-body">	
 				<p><?php echo $noticia['nm_noticia']."<br>"; ?></p>
@@ -203,6 +213,8 @@ if ($count_views['COUNT(*)'] == 0) {
 			<a class="btn" href="php/delete_noticia.php?id=<?php echo $noticia['id'];?>">Excluir</a>
 			</div>
   		</div>
+  	</div>
+  </div>
 
 <!-- Modal -->
 	<div class="modal fade" id="exampleModal<?php echo $noticia['id'];?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
