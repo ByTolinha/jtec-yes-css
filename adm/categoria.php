@@ -1,5 +1,3 @@
-
-
 <?php  
 session_start();
 if ($_SESSION['nivel'] != 1) {
@@ -14,8 +12,8 @@ $script_categoria->execute();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -97,38 +95,38 @@ $script_categoria->execute();
                     <h1 class="text-2xl font-semibold pt-2 pb-6">Categorias</h1>
                 </div>
 
-                	<!-- JS -->
-	<script src="js/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#cadastrar").click(function(){
-  			$.ajax({
-  				url: "php/script_categoria.php",
-  				type: "POST",
-  				data: "categoria="+$("#categoria").val(),
-  				dataType: "html"
-  			}).done(function(resposta) {
-	    $("span").html(resposta);
+                    <!-- JS -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#cadastrar").click(function(){
+            $.ajax({
+                url: "php/script_categoria.php",
+                type: "POST",
+                data: "categoria="+$("#categoria").val(),
+                dataType: "html"
+            }).done(function(resposta) {
+        $("#span_cadastro").html(resposta);
 
-		}).fail(function(jqXHR, textStatus ) {
-	    console.log("Request failed: " + textStatus);
+        }).fail(function(jqXHR, textStatus ) {
+        console.log("Request failed: " + textStatus);
 
-		}).always(function() {
-	    console.log("completou");
-		});
-  	});
+        }).always(function() {
+        console.log("completou");
+        });
+    });
 });
-	</script>
-	</head>
+    </script>
+    </head>
 <body>
-	<!-- Tag "span" usada para retorno do ajax -->
-	<span></span>
+    <!-- Tag "span" usada para retorno do ajax -->
+    <span id="span_cadastro"></span>
 
 <div class="container mt-3 col-6">
-	<div class="form-floating">
-		<input class="form-control" type="text" id="categoria" placeholder="Nome da categoria">
-		<label for="categoria">Nome da categoria</label>
-	</div>
+    <div class="form-floating">
+        <input class="form-control" type="text" id="categoria" placeholder="Nome da categoria">
+        <label for="categoria">Nome da categoria</label>
+    </div>
 <button class="btn btn-primary mt-2" id="cadastrar">Cadastrar</button>
                 
                 <!-- TABLE -->
@@ -171,46 +169,46 @@ $script_categoria->execute();
                                 </td>
                             </tr>
 
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#edit_categoria_<?php echo $categoria['id']; ?>").click(function(){
-  				$.ajax({
-  				url: "php/edit_categoria.php",
-  				type: "POST",
-  				data: "nm_categoria="+$("#nm_categoria_<?php echo $categoria['id']; ?>").val()+"&id="+<?php echo $categoria['id'];?>,
-  				dataType: "html"
-  				}).done(function(resposta) {
-	    	$("span").html(resposta);
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#edit_categoria_<?php echo $categoria['id']; ?>").click(function(){
+                $.ajax({
+                url: "php/edit_categoria.php",
+                type: "POST",
+                data: "nm_categoria="+$("#nm_categoria_<?php echo $categoria['id']; ?>").val()+"&id="+<?php echo $categoria['id'];?>,
+                dataType: "html"
+                }).done(function(resposta) {
+            $("span").html(resposta);
 
-			}).fail(function(jqXHR, textStatus ) {
-	    	console.log("Request failed: " + textStatus);
+            }).fail(function(jqXHR, textStatus ) {
+            console.log("Request failed: " + textStatus);
 
-			}).always(function() {
-	    	console.log("completou");
-			});
-  			});
-		});
-		</script>
+            }).always(function() {
+            console.log("completou");
+            });
+            });
+        });
+        </script>
 
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModal<?php echo $categoria['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-			<div class="modal-content">
-			    <span id="edit"></span>
-			    <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">Editar Categoria #<b id="id_<?php echo $categoria['id']; ?>"><?php echo $categoria['id']; ?></b></h5>
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			    </div>
-			    <div class="modal-body">
-			       <input type="text" class="form-control" id="nm_categoria_<?php echo $categoria['id']; ?>" placeholder="Nome da categoria" value="<?php echo $categoria['nm_categoria']; ?>"><br>
-			    </div>
-			    <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-			        <button type="button" class="btn btn-primary" id="edit_categoria_<?php echo $categoria['id']; ?>">Salvar Alterações</button>
-			    </div>
-			</div>
-			</div>
-		</div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal<?php echo $categoria['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <span id="edit"></span>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Categoria #<b id="id_<?php echo $categoria['id']; ?>"><?php echo $categoria['id']; ?></b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                   <input type="text" class="form-control" id="nm_categoria_<?php echo $categoria['id']; ?>" placeholder="Nome da categoria" value="<?php echo $categoria['nm_categoria']; ?>"><br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="edit_categoria_<?php echo $categoria['id']; ?>">Salvar Alterações</button>
+                </div>
+            </div>
+            </div>
+        </div>
 
                         <?php }?>
 

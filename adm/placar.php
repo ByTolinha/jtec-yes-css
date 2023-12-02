@@ -1,37 +1,22 @@
 <?php  
 session_start();
 if ($_SESSION['nivel'] != 1) {
-	header('location:../');
+    header('location:../');
 }
 include('php/conecta.php');
-include('../nav.php');
 
 //Consulta Placar
 $script_placar = $conn->prepare("SELECT * FROM tb_placar");
 $script_placar->execute();
 ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		<!-- JS -->
-	<script src="js/jquery-3.6.0.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- JS -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -116,48 +101,48 @@ $script_placar->execute();
                     <h1 class="text-2xl font-semibold pt-2 pb-6">Placar</h1>
                 </div>
 
-                	<!-- Tag "span" usada para retorno do ajax -->
-	<span></span>
+                    <!-- Tag "span" usada para retorno do ajax -->
+    <span id="span_cadastro"></span>
 
 <div class="container col-6 mt-3">
-	<div class="form-floating">
-		<input class="form-control" type="text" id="time1" placeholder="Nome de usuário">
-		<label for="user">Time 1</label>
-	</div>
-	<div class="form-floating">
-		<input class="form-control" type="text" id="gols1" placeholder="E-mail">
-		<label for="login">Gols</label>
-	</div>
-	<div class="form-floating">
-		<input class="form-control" type="text" id="time2" placeholder="Senha">
-		<label for="password">Time 2</label>
-	</div>
-	<div class="form-floating">
-		<input class="form-control" type="text" id="gols2" placeholder="Senha">
-		<label for="password">Gols</label>
-	</div>
-		<button class="btn btn-primary mt-2" id="cadastrar_user">Cadastrar</button>
-	<script src="js/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#cadastrar_user").click(function(){
-  			$.ajax({
-  				url: "php/script_placar.php",
-  				type: "POST",
-  				data: "nm_time_1="+$("#time1").val()+"&gols_1="+$("#gols1").val()+"&nm_time_2="+$("#time2").val()+"&gols_2="+$("#gols2").val(),
-  				dataType: "html"
-  			}).done(function(resposta) {
-	    $("span").html(resposta);
+    <div class="form-floating">
+        <input class="form-control" type="text" id="time1" placeholder="Nome de usuário">
+        <label for="user">Time 1</label>
+    </div>
+    <div class="form-floating">
+        <input class="form-control" type="text" id="gols1" placeholder="E-mail">
+        <label for="login">Gols</label>
+    </div>
+    <div class="form-floating">
+        <input class="form-control" type="text" id="time2" placeholder="Senha">
+        <label for="password">Time 2</label>
+    </div>
+    <div class="form-floating">
+        <input class="form-control" type="text" id="gols2" placeholder="Senha">
+        <label for="password">Gols</label>
+    </div>
+        <button class="btn btn-primary mt-2" id="cadastrar_user">Cadastrar</button>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#cadastrar_user").click(function(){
+            $.ajax({
+                url: "php/script_placar.php",
+                type: "POST",
+                data: "nm_time_1="+$("#time1").val()+"&gols_1="+$("#gols1").val()+"&nm_time_2="+$("#time2").val()+"&gols_2="+$("#gols2").val(),
+                dataType: "html"
+            }).done(function(resposta) {
+        $("#span_cadastro").html(resposta);
 
-		}).fail(function(jqXHR, textStatus ) {
-	    console.log("Request failed: " + textStatus);
+        }).fail(function(jqXHR, textStatus ) {
+        console.log("Request failed: " + textStatus);
 
-		}).always(function() {
-	    console.log("completou");
-		});
-  	});
+        }).always(function() {
+        console.log("completou");
+        });
+    });
 });
-	</script>
+    </script>
 
                 
                 <!-- TABLE -->
@@ -215,52 +200,52 @@ $script_placar->execute();
                                 </td>
                             </tr>
             <script type="text/javascript">
-		$(document).ready(function(){
-			$("#edit_placar_<?php echo $placar['id']; ?>").click(function(){
-  			$.ajax({
-  				url: "php/edit_placar.php",
-  				type: "POST",
-  				data: "nm_time_1="+$("#nm_time_1_<?php echo $placar['id']; ?>").val()+"&nm_time_2="+$("#nm_time_2_<?php echo $placar['id']; ?>").val()+"&gols_1="+$("#gols_1_<?php echo $placar['id']; ?>").val()+"&gols_2="+$("#gols_2_<?php echo $placar['id']; ?>").val()+"&id="+<?php echo $placar['id'];?>,
-  				dataType: "html"
-  			}).done(function(resposta) {
-	    $("span").html(resposta);
+        $(document).ready(function(){
+            $("#edit_placar_<?php echo $placar['id']; ?>").click(function(){
+            $.ajax({
+                url: "php/edit_placar.php",
+                type: "POST",
+                data: "nm_time_1="+$("#nm_time_1_<?php echo $placar['id']; ?>").val()+"&nm_time_2="+$("#nm_time_2_<?php echo $placar['id']; ?>").val()+"&gols_1="+$("#gols_1_<?php echo $placar['id']; ?>").val()+"&gols_2="+$("#gols_2_<?php echo $placar['id']; ?>").val()+"&id="+<?php echo $placar['id'];?>,
+                dataType: "html"
+            }).done(function(resposta) {
+        $("span").html(resposta);
 
-		}).fail(function(jqXHR, textStatus ) {
-	    console.log("Request failed: " + textStatus);
+        }).fail(function(jqXHR, textStatus ) {
+        console.log("Request failed: " + textStatus);
 
-		}).always(function() {
-	    console.log("completou");
-		});
-  	});
+        }).always(function() {
+        console.log("completou");
+        });
+    });
 });
-	</script>
+    </script>
 
-			<!-- Modal -->
-			<div class="modal fade" id="exampleModal<?php echo $placar['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			    	<span id="edit"></span>
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">Editar Placar #<b id="id_<?php echo $placar['id']; ?>"><?php echo $placar['id']; ?></b></h5>
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			      </div>
-			      <div class="modal-body">
-			       <input type="text" id="nm_time_1_<?php echo $placar['id']; ?>" placeholder="Time 1" value="<?php echo $placar['nm_time_1']; ?>"><br>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal<?php echo $placar['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <span id="edit"></span>
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Placar #<b id="id_<?php echo $placar['id']; ?>"><?php echo $placar['id']; ?></b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                   <input type="text" id="nm_time_1_<?php echo $placar['id']; ?>" placeholder="Time 1" value="<?php echo $placar['nm_time_1']; ?>"><br>
 
-			       <input type="text" id="gols_1_<?php echo $placar['id']; ?>" placeholder="Gols" value="<?php echo $placar['gols_1']; ?>"><br>
+                   <input type="text" id="gols_1_<?php echo $placar['id']; ?>" placeholder="Gols" value="<?php echo $placar['gols_1']; ?>"><br>
 
-			       <input type="text" id="nm_time_2_<?php echo $placar['id']; ?>" placeholder="Time 2" value="<?php echo $placar['nm_time_2']; ?>"><br>
+                   <input type="text" id="nm_time_2_<?php echo $placar['id']; ?>" placeholder="Time 2" value="<?php echo $placar['nm_time_2']; ?>"><br>
 
-			       <input type="text" id="gols_2_<?php echo $placar['id']; ?>" placeholder="Gols" value="<?php echo $placar['gols_2']; ?>"><br>
+                   <input type="text" id="gols_2_<?php echo $placar['id']; ?>" placeholder="Gols" value="<?php echo $placar['gols_2']; ?>"><br>
 
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-			        <button type="button" class="btn btn-primary" id="edit_placar_<?php echo $placar['id']; ?>">Salvar Alterações</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="edit_placar_<?php echo $placar['id']; ?>">Salvar Alterações</button>
+                  </div>
+                </div>
+              </div>
+            </div>
                         <?php }?>
 
                         </tbody>

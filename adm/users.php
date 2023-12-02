@@ -1,7 +1,7 @@
 <?php  
 session_start();
 if ($_SESSION['nivel'] != 1) {
-	header('location:../');
+    header('location:../');
 }
 include('php/conecta.php');
 
@@ -16,10 +16,10 @@ $script_nivel->execute();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		<!-- JS -->
-	<script src="js/jquery-3.6.0.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- JS -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -104,48 +104,48 @@ $script_nivel->execute();
                     <h1 class="text-2xl font-semibold pt-2 pb-6">Usuarios</h1>
                 </div>
 
-                	<!-- Tag "span" usada para retorno do ajax -->
-	<span id="span"></span>
+                    <!-- Tag "span" usada para retorno do ajax -->
+    <span id="span"></span>
 
 <div class="container col-6 mt-3">
-	<div class="form-floating">
-		<input class="form-control" type="text" id="user" placeholder="Nome de usuário">
-		<label for="user">Nome de Usuário</label>
-	</div>
-	<div class="form-floating">
-		<input class="form-control" type="text" id="login" placeholder="E-mail">
-		<label for="login">E-mail</label>
-	</div>
-	<div class="form-floating">
-		<input class="form-control" type="text" id="password" placeholder="Senha">
-		<label for="password">Senha</label>
-	</div>
-		<select class="form-control" id="id_nivel">
-			<option value="1">Admin</option>
-			<option value="2">User</option>
-		</select>
-		<button class="btn btn-primary mt-2" id="cadastrar_user">Cadastrar</button>
-	<script src="js/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#cadastrar_user").click(function(){
-  			$.ajax({
-  				url: "php/script_user.php",
-  				type: "POST",
-  				data: "login="+$("#login").val()+"&password="+$("#password").val()+"&user="+$("#user").val()+"&id_nivel="+$("#id_nivel").val(),
-  				dataType: "html"
-  			}).done(function(resposta) {
-	    $("#span").html(resposta);
+    <div class="form-floating">
+        <input class="form-control" type="text" id="user" placeholder="Nome de usuário">
+        <label for="user">Nome de Usuário</label>
+    </div>
+    <div class="form-floating">
+        <input class="form-control" type="text" id="login" placeholder="E-mail">
+        <label for="login">E-mail</label>
+    </div>
+    <div class="form-floating">
+        <input class="form-control" type="text" id="password" placeholder="Senha">
+        <label for="password">Senha</label>
+    </div>
+        <select class="form-control" id="id_nivel">
+            <option value="1">Admin</option>
+            <option value="2">User</option>
+        </select>
+        <button class="btn btn-primary mt-2" id="cadastrar_user">Cadastrar</button>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#cadastrar_user").click(function(){
+            $.ajax({
+                url: "php/script_user.php",
+                type: "POST",
+                data: "login="+$("#login").val()+"&password="+$("#password").val()+"&user="+$("#user").val()+"&id_nivel="+$("#id_nivel").val(),
+                dataType: "html"
+            }).done(function(resposta) {
+        $("#span").html(resposta);
 
-		}).fail(function(jqXHR, textStatus ) {
-	    console.log("Request failed: " + textStatus);
+        }).fail(function(jqXHR, textStatus ) {
+        console.log("Request failed: " + textStatus);
 
-		}).always(function() {
-	    console.log("completou");
-		});
-  	});
+        }).always(function() {
+        console.log("completou");
+        });
+    });
 });
-	</script>
+    </script>
 
                 
                 <!-- TABLE -->
@@ -207,63 +207,63 @@ $script_nivel->execute();
                                 </td>
                             </tr>
                            <script type="text/javascript">
-		$(document).ready(function(){
-			$("#edit_user_<?php echo $users['id']; ?>").click(function(){
-  			$.ajax({
-  				url: "php/edit_user.php",
-  				type: "POST",
-  				data: "nm_user="+$("#nm_user_<?php echo $users['id']; ?>").val()+"&ds_login="+<?php echo $users['id'];?>+"&ds_login="+$("#ds_login_<?php echo $users['id']; ?>").val()+"&ds_senha="+$("#ds_senha_<?php echo $users['id']; ?>").val()+"&id_nivel="+$("#id_nivel_<?php echo $users['id']; ?>").val()+"&id="+<?php echo $users['id'];?>,
-  				dataType: "html"
-  			}).done(function(resposta) {
-	    $("span").html(resposta);
+        $(document).ready(function(){
+            $("#edit_user_<?php echo $users['id']; ?>").click(function(){
+            $.ajax({
+                url: "php/edit_user.php",
+                type: "POST",
+                data: "nm_user="+$("#nm_user_<?php echo $users['id']; ?>").val()+"&ds_login="+<?php echo $users['id'];?>+"&ds_login="+$("#ds_login_<?php echo $users['id']; ?>").val()+"&ds_senha="+$("#ds_senha_<?php echo $users['id']; ?>").val()+"&id_nivel="+$("#id_nivel_<?php echo $users['id']; ?>").val()+"&id="+<?php echo $users['id'];?>,
+                dataType: "html"
+            }).done(function(resposta) {
+        $("span").html(resposta);
 
-		}).fail(function(jqXHR, textStatus ) {
-	    console.log("Request failed: " + textStatus);
+        }).fail(function(jqXHR, textStatus ) {
+        console.log("Request failed: " + textStatus);
 
-		}).always(function() {
-	    console.log("completou");
-		});
-  	});
+        }).always(function() {
+        console.log("completou");
+        });
+    });
 });
-	</script>
+    </script>
 
 <!-- Modal -->
-			<div class="modal fade" id="exampleModal<?php echo $users['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			    	<span id="edit"></span>
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">Editar User #<b id="id_<?php echo $users['id']; ?>"><?php echo $users['id']; ?></b></h5>
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			      </div>
-			      <div class="modal-body">
-			      	<!-- Inputs -->
-			       <input class="form-control" type="text" id="nm_user_<?php echo $users['id']; ?>" placeholder="Nome" value="<?php echo $users['nm_user']; ?>">
-			       <input class="form-control" type="text" id="ds_login_<?php echo $users['id']; ?>" placeholder="E-mail" value="<?php echo $users['ds_login']; ?>">
-			       <input class="form-control" type="text" id="ds_senha_<?php echo $users['id']; ?>" placeholder="Senha" value="<?php echo $users['ds_senha']; ?>">
-					
-					 
-			       <select class="form-control" id="id_nivel_<?php echo $users['id']; ?>">
-				   <option value="<?php echo $users['id_nivel']; ?>">
-				   <?php if($users['id_nivel'] == 1){ 
-						echo "Admin";
-					 }else{ 
-						echo "User";
-					 } ?>
-					</option>
-			       	<option value="2">User</option>
-					   <option value="1">Admin</option>
-			       </select>
-					
-					
-			      </div>
-			      <div class="modal-footer">
-			        <button class="btn btn-outline-danger" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-			        <button class="btn btn-outline-success" type="button" class="btn btn-primary" id="edit_user_<?php echo $users['id']; ?>">Salvar Alterações</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+            <div class="modal fade" id="exampleModal<?php echo $users['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <span id="edit"></span>
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar User #<b id="id_<?php echo $users['id']; ?>"><?php echo $users['id']; ?></b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Inputs -->
+                   <input class="form-control" type="text" id="nm_user_<?php echo $users['id']; ?>" placeholder="Nome" value="<?php echo $users['nm_user']; ?>">
+                   <input class="form-control" type="text" id="ds_login_<?php echo $users['id']; ?>" placeholder="E-mail" value="<?php echo $users['ds_login']; ?>">
+                   <input class="form-control" type="text" id="ds_senha_<?php echo $users['id']; ?>" placeholder="Senha" value="<?php echo $users['ds_senha']; ?>">
+                    
+                     
+                   <select class="form-control" id="id_nivel_<?php echo $users['id']; ?>">
+                   <option value="<?php echo $users['id_nivel']; ?>">
+                   <?php if($users['id_nivel'] == 1){ 
+                        echo "Admin";
+                     }else{ 
+                        echo "User";
+                     } ?>
+                    </option>
+                    <option value="2">User</option>
+                       <option value="1">Admin</option>
+                   </select>
+                    
+                    
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-outline-danger" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-outline-success" type="button" class="btn btn-primary" id="edit_user_<?php echo $users['id']; ?>">Salvar Alterações</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
                         <?php }?>
 
