@@ -3,12 +3,13 @@ session_start();
 if ($_SESSION['nivel'] != 1) {
 	header('location:../');
 }else{
-		$id = $_GET['id'];
+		$id = $_POST['id'];
+		$nm_categoria = $_POST['nm_categoria'];
 		include('conecta.php');
 		try {
-		  $delete_categoria = $conn->prepare("DELETE FROM tb_users WHERE (`id` = '$id')");
-		  $delete_categoria->execute();
-		  header('location:../users.php');
+		  $att_categoria = $conn->prepare("UPDATE tb_categoria SET nm_categoria = '$nm_categoria' WHERE id = '$id'");
+		  $att_categoria->execute();
+		  echo "<script type='text/javascript'>window.location.reload(true);</script>";
 		} catch(PDOException $e) {
 		    echo $e;
 		}

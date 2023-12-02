@@ -28,8 +28,8 @@ $pre = "../";
 
   <!-- Pesquisar -->
 <form action="<?php echo $pre;?>search.php" method="GET">
-	<input type="text" name="data" placeholder="Pesquise uma noticia">
-	<input type="submit" value="Pesquisar">
+  <input type="text" name="data" placeholder="Pesquise uma noticia">
+  <input type="submit" value="Pesquisar">
 </form>
 <hr>
 </nav>
