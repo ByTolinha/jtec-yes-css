@@ -73,17 +73,50 @@
   border-radius: 10px; 
   border: none;  
 }
-	.card{
+.card-group-perfil{
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 5px;
+}
+#suas-not{
+	white-space: nowrap; 
+  width: 400px;
+  height: auto;
+	overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-perfil{
+	width: 310px;
+	max-width: 100%;
+	height: 400px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	transition: 500ms all;
+}
+.card-perfil > img{
+	height: 200px;
+	min-height: 150px;
+}
+@media only screen and (max-width:800px){
+	.card-perfil > img{
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+		position: top;
+	}
+}
+	#not-alta,#ultimas,#not-populares{
 		width: 310px;
 		max-width: 100%;
 	    height: 400px;
 	    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	    transition: 500ms all;
 	}
-	.card:hover{
+	.card > .img-card:hover{
+		color: black;
 		background: #1173cd;
 		opacity: 20%;
 	}
+
 .img-card{
 	height: 200px;
 	min-height: 150px;
@@ -96,29 +129,6 @@
 		position: top;
 	}
 }
-.carrossel{
-	width: 200px;
-	height: 100px;
-	background-image: linear-gradient(to right, #ff0 0%, #ff0 50%, #f00 50%);
-	background-repeat: no-repeat;
-	background-position: 100% 0%;
-	transition: 1s background-position;
-	overflow: hidden;
-}
-.carrossel:hover{
-	background-position: 0% 0%;
-}
-h{
-	display: inline-block;
-	width: 100%;
-	margin-left: -100%;
-	transition: 1s margin-left;
-}
-.carrossel:hover h{
-	margin-left: 0%;
-	transition: 1s margin-left 500ms;
-}
-
 .categ{
 	width: 100%;
 	overflow-x: scroll;
@@ -162,6 +172,11 @@ h{
 		width: 100%;
 	}
 }
+#img-ultimas{
+	height: 100px;
+	max-width: 200px;
+	margin: 5px;
+}
 #div-autor{
 	display: grid;
 	background: #dcd8d8;
@@ -183,9 +198,13 @@ h{
 	overflow-y: hidden;
 }
 .card-view{
-	width: 100%;
-    height: 400px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	 white-space: nowrap; 
+    width: 280px; 
+   overflow: hidden;
+  text-overflow: ellipsis; 
+	width: 310px;
+  height: 400px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #img-categoria{
 	width: 100%;
