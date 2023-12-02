@@ -69,10 +69,10 @@ if ($count_views['COUNT(*)'] == 0) {
 </head>
 <body>
 	<style type="text/css">
-	.card-perfil{
-	    display: grid;
-	    grid-template-columns: repeat(5, 1fr);
-	    gap: 15px;
+	#img-1, #img-2{
+		width: 250px;
+		height: 200px;
+		max-height: 300px;
 	}
 </style>
 	<!-- Nav -->
@@ -96,8 +96,6 @@ if ($count_views['COUNT(*)'] == 0) {
 		</div>
 		<div>
 			<div class="mt-2">
-				<button>segui</button>
-				<button>favs</button>
 				<button class="btn" data-bs-toggle="collapse" data-bs-target="#escrever" aria-expanded="false" aria-controls="collapse"><img width="35" src="img/icons8-criar-ordem.gif"></button>
 				<button data-bs-toggle="collapse" data-bs-target="#config" class="btn"><img width="35" src="img/icons8-serviços.gif"></button>
 				<button data-bs-toggle="collapse" data-bs-target="#estatisticas" class="btn">Estatísticas</button>
@@ -116,7 +114,6 @@ if ($count_views['COUNT(*)'] == 0) {
 		</div>
 		<div class="col-6">
 		<select class="form-control" name="id_categoria">
-			<option>Escolha a categoria</option>
 			<?php while ($categoria = $script_categoria->fetch(PDO::FETCH_ASSOC)) {?>	
 			<option value="<?php echo $categoria['id']?>"><?php echo $categoria['nm_categoria']?></option>
 			<?php }?>
@@ -167,31 +164,32 @@ if ($count_views['COUNT(*)'] == 0) {
 	</form>
 	</div>
 </div>
+<center>
 <div class="collapse" data-bs-parent="#accordion" id="estatisticas">
-		<div class="container shadow p-2 col-7 text-center">
-	<h2>Estatisticas</h2>
+		<div class="container row  shadow p-2 col-7 text-center">
+	<h2>Estatísticas</h2>
 <br>
-<div>
+<div class="col">
   <h4>Número de noticias</h4>
   <p><?php echo $n_de_noticias;?></p>
 </div>
 
-<div>
+<div class="col">
   <h4>Número de avaliações</h4>
   <p><?php echo $like;?></p>
 </div>
 
-<div>
+<div class="col">
   <h4>Número de views</h4>
   <p><?php echo $views;?></p>
 </div>
 </div>
 </div>
+</center>
 
-<!-- Notícias do user -->
 <div class="container mt-5">
 <h1>Suas Noticias</h1>
-<div class="card-perfil">
+<div class="card-group-perfil">
 	<?php
 		// Verificação se tem noticias
 		if ($script_noticias->rowCount()>0){
@@ -202,18 +200,23 @@ if ($count_views['COUNT(*)'] == 0) {
 		$script_nome_autor->execute();
 		$nome_autor = $script_nome_autor->fetch(PDO::FETCH_ASSOC);
 	?>
-		<div class="card">
-			<img src="img/<?php echo $noticia['img_1']; ?>">
-			<div class="card-body">	
-				<p><?php echo $noticia['nm_noticia']."<br>"; ?></p>
-				<p>Autor: <?php echo $nome_autor['nm_user']."<br>"; ?></p>
-			</div>
-			<div class="card-footer">
-			<button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $noticia['id'];?>">Editar</button>
-			<a class="btn" href="php/delete_noticia.php?id=<?php echo $noticia['id'];?>">Excluir</a>
-			</div>
-  		</div>
-  	</div>
+		<div id="suas-not" class="card mb-3">
+      <div class="row no-gutters" onclick="window.location.href = 'view.php?id=<?= $noticia['id']?>'">
+        <div class="col-md-4">
+          <img id="img-ultimas" src="img/<?php echo $noticia['img_1'];?>" class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title"><?php echo $noticia['nm_noticia']; ?></h5>
+            <p class="card-text"><?php echo $noticia['ds_noticia']; ?></p>
+          </div>
+          <div class="card-footer">
+						<button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $noticia['id'];?>">Editar</button>
+						<a class="btn" href="php/delete_noticia.php?id=<?php echo $noticia['id'];?>">Excluir</a>
+					</div>
+        </div>
+      </div>
+    </div>
   </div>
 
 <!-- Modal -->
@@ -223,7 +226,7 @@ if ($count_views['COUNT(*)'] == 0) {
 			<span id="edit"></span>
 			<div class="modal-header">
 				<span></span>
-			    <h5 class="modal-title" id="exampleModalLabel">Editar User #<b id="id_<?php echo $noticia['id']; ?>"><?php echo $noticia['id']; ?></b></h5>
+			    <h5 class="modal-title" id="exampleModalLabel">Editar Noticia #<b id="id_<?php echo $noticia['id']; ?>"><?php echo $noticia['id']; ?></b></h5>
 			    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
@@ -232,6 +235,7 @@ if ($count_views['COUNT(*)'] == 0) {
 				<label>Nome da Notícia</label>
 			    <input class="form-control" type="text" name="nm_noticia" placeholder="Titulo" value="<?php echo $noticia['nm_noticia']; ?>">
 			    <label>Descricão</label>
+			    <textarea></textarea>
 				<input class="form-control" type="text" name="ds_noticia" placeholder="Descrição" value="<?php echo $noticia['ds_noticia']; ?>">
 
 				<input style="display: none;" type="text" name="id" placeholder="id" value="<?php echo $noticia['id']; ?>"><br>
@@ -253,15 +257,16 @@ if ($count_views['COUNT(*)'] == 0) {
 					<option value="<?php echo $categoria_select['id'];?>"><?php echo $categoria_select['nm_categoria'];?></option>
 				<?php }?>
 				</select>
-			</div>
 			<div class="modal-footer">
 			    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 			    <button type="submit" class="btn btn-primary" id="edit_noticia_<?php echo $noticia['id']; ?>">Salvar Alterações</button>
+			  </div>
 			</form>
 			</div>
 			</div>
-		</div>
-	</div>
+			</div>
+			</div>
+
 	<!-- Script editar notícia -->
 	<span></span>
 	<script type="text/javascript">
@@ -291,12 +296,11 @@ $(document).ready(function() {
 
 <?php }
 			}else{
-				echo "Sem noticia";
+				
 			}
 ?>
-</div>
-</div>
-
+  	</div>
+  </div>
 		<!-- Script editar user -->
 		<script src="js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -373,5 +377,3 @@ $(document).ready(function() {
 			});
 		</script>
 </html>
-	
-

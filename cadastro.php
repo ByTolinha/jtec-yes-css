@@ -13,6 +13,19 @@ if (isset($_SESSION['id'])) {
 </head>
 	<script src="js/jquery-3.6.0.min.js"></script>
 <body>
+	<style type="text/css">
+		#img1{
+			object-fit: scale-down;
+		}
+		#img-cadastro{
+			width: 250px;
+			max-height: 300px;
+			height: 250px;
+			border-radius: 10px;
+			margin-bottom: 10px;
+			object-fit: cover;
+		}
+	</style>
 	<?php include('nav.php');?>
 	<!-- Tag "span" usada para retorno do ajax -->
 	<span></span><br>
@@ -36,7 +49,7 @@ if (isset($_SESSION['id'])) {
 			</div>
 		<div class="p-3 col-8">
 			<div>
-			<img id="img-1" src="img/user.png">
+			<img id="img-cadastro" src="img/iuser.png">
 			<input type="file" class="form-control" id="img1" name="ds_img">
 			</div>
 		</div>
@@ -50,7 +63,7 @@ if (isset($_SESSION['id'])) {
 </body>
   	<!-- Exibir a img para visualizá-la -->
 		<script>
-			const image = document.querySelector("#img-1"),
+			const image = document.querySelector("#img-cadastro"),
 			input = document.querySelector("#img1");
 
 			input.addEventListener("change", () => {

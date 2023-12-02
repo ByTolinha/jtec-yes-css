@@ -42,12 +42,12 @@ $text = "Últimas Notícias";
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Home | J-Tec	</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/style.css">
-  	<link rel="stylesheet" type="text/css" href="css/bootstrap-5.2.2-dist/css/bootstrap.min.css">
-	<script src="js/jquery-3.6.0.min.js"></script>
+  <meta charset="utf-8">
+  <title>Home | J-Tec </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-5.2.2-dist/css/bootstrap.min.css">
+  <script src="js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <style type="text/css">
@@ -57,33 +57,39 @@ $text = "Últimas Notícias";
     overflow: hidden;
     text-overflow: ellipsis; 
 }
-  </style>
+
+#placar{
+  height: auto;
+  width: 300px;
+  border-radius: 20px 20px 20px 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+</style>
 <!-- Nav -->
 <?php include('nav.php'); ?>
 
 <!-- While categoria -->
   <div class="categ shadow">
 <?php  while ($categoria = $script_categoria->fetch(PDO::FETCH_ASSOC)) { ?>
-	<button class="btn btn-outline-primary m-2 shadow" onclick="window.location.href = 'index.php?categoria=<?= $categoria['id']?>'"><?php echo $categoria['nm_categoria']; ?></button>
+  <button class="btn btn-outline-primary m-2 shadow" onclick="window.location.href = 'index.php?categoria=<?= $categoria['id']?>'"><?php echo $categoria['nm_categoria']; ?></button>
 <?php } ?>
- </div>
-
-<!-- Carrossel -->
-  <div class="container-fluid carrossel mt-3">
-        <img id="img-carousel" src="OIP.jpg" class="img-fluid" alt="...">
-        <h2>Bem Vindo(a) ao Jornal da Etec!</h2>
-    </div>
-
+ </div> 
+ <br><br>
   <!-- Placar -->
   <?php if($script_placar->rowCount()>0){?>
-<div>
-<?php echo $placar['nm_time_1']." ".$placar['gols_1'];?> <b>X</b> <?php echo $placar['nm_time_2']." ".$placar['gols_2'];?>
+<center>
+  <div id="placar">
+    <h2>Interclasse</h2>
+  <h3><?php echo $placar['nm_time_1']." ".$placar['gols_1'];?> <br>
+    <b>X</b><br> 
+    <?php echo $placar['nm_time_2']." ".$placar['gols_2'];?></h3>
 </div>
+</center>
 <?php }?>
 
   <!-- While Últimas Noticias -->
   <div class="container m-5">
-	 <h1><?php echo $text?></h1>
+   <h1><?php echo $text?></h1>
   <div id="overflow-card" class="card-group">
     <?php
       // Verificação se tem noticias
@@ -95,20 +101,20 @@ $text = "Últimas Notícias";
       $script_nome_autor->execute();
       $nome_autor = $script_nome_autor->fetch(PDO::FETCH_ASSOC);
     ?>
-		<div class="card" onclick="window.location.href = 'view.php?id=<?= $noticia['id'];?>'">
-			<img class="img-card" src="img/<?php echo $noticia['img_1']; ?>">	
+    <div id="ultimas" class="card" onclick="window.location.href = 'view.php?id=<?= $noticia['id'];?>'">
+      <img class="img-card" src="img/<?php echo $noticia['img_1']; ?>"> 
       <div class="card-body">
-			  <h5><?php echo $noticia['nm_noticia'];?></h5>
+        <h5><?php echo $noticia['nm_noticia'];?></h5>
         <p class="desc"><?php echo $noticia['ds_noticia'];?></p>
       </div>
       <div class="card-footer">
-			  <p>Autor: <?php echo $nome_autor['nm_user']; ?></p>
+        <p>Autor: <?php echo $nome_autor['nm_user']; ?></p>
       </div>
-  	</div>
+    </div>
     <?php 
         }
       }else{
-	       echo "Sem noticia";
+         echo "Sem noticia";
       }
 
       // Verificação se tem filtro
@@ -124,16 +130,16 @@ $text = "Últimas Notícias";
       $script_nome_autor_alta->execute();
       $nome_autor_alta = $script_nome_autor_alta->fetch(PDO::FETCH_ASSOC);
     ?>
-		<div class="card" onclick="window.location.href = 'view.php?id=<?= $noticia_alta['id'];?>'">
-			<img class="img-card" src="img/<?php echo $noticia_alta['img_1']; ?>">
-      <div class="card-body">	
-			  <h5><?php echo $noticia_alta['nm_noticia']; ?></h5>
+    <div id="not-alta" class="card" onclick="window.location.href = 'view.php?id=<?= $noticia_alta['id'];?>'">
+      <img class="img-card" src="img/<?php echo $noticia_alta['img_1']; ?>">
+      <div class="card-body"> 
+        <h5><?php echo $noticia_alta['nm_noticia']; ?></h5>
         <p class="desc"><?php echo $noticia_alta['ds_noticia'];?></p>
       </div>
       <div class="card-footer">
-			  <p>Autor: <?php echo $nome_autor_alta['nm_user']; ?></p>
+        <p>Autor: <?php echo $nome_autor_alta['nm_user']; ?></p>
       </div>
-  	</div>
+    </div>
     <?php }}?>
   </div>
  
@@ -146,16 +152,16 @@ $text = "Últimas Notícias";
       $script_nome_autor_popular->execute();
       $nome_autor_popular = $script_nome_autor_popular->fetch(PDO::FETCH_ASSOC);
     ?>
-		<div class="card" onclick="window.location.href = 'view.php?id=<?= $noticia_populares['id']?>'">
-			<img class="img-card" src="img/<?php echo $noticia_populares['img_1']; ?>">
-      <div class="card-body">	
-			  <h5><?php echo $noticia_populares['nm_noticia']; ?></h5>
+    <div id="not-populares" class="card" onclick="window.location.href = 'view.php?id=<?= $noticia_populares['id']?>'">
+      <img class="img-card" src="img/<?php echo $noticia_populares['img_1']; ?>">
+      <div class="card-body"> 
+        <h5><?php echo $noticia_populares['nm_noticia']; ?></h5>
         <p class="desc"><?php echo $noticia_populares['ds_noticia'];?></p>
       </div>
       <div class="card-footer">
-			  <p>Autor: <?php echo $nome_autor_popular['nm_user']; ?></p>
+        <p>Autor: <?php echo $nome_autor_popular['nm_user']; ?></p>
       </div>
-  	</div>
+    </div>
     <?php }?>
   </div>
 </div>
